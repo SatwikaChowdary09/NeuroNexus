@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Registration Form</title>
+  <style>
+    :root {
+      --primary-color: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent-color: #10b981;
+      --background-color: #f9fafb;
+      --card-color: #ffffff;
+      --text-color: #374151;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f6f9fc, #edf2f7);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--card-color);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .form-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+      animation: pulse 15s infinite linear;
+    }
+
+    @keyframes pulse {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-25%, -25%) scale(1.5); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .form-header h1 {
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 24px;
+      position: relative;
+    }
+
+    .form-header p {
+      font-size: 14px;
+      opacity: 0.9;
+      position: relative;
+    }
+
+    .form-body {
+      padding: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      animation: slideIn 0.5s ease-out forwards;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.15s; }
+    .form-group:nth-child(3) { animation-delay: 0.2s; }
+    .form-group:nth-child(4) { animation-delay: 0.25s; }
+    .form-group:nth-child(5) { animation-delay: 0.3s; }
+    .form-group:nth-child(6) { animation-delay: 0.35s; }
+    .form-group:nth-child(7) { animation-delay: 0.4s; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      outline: none;
+      background-color: #f9fafb;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .radio-option input {
+      margin-right: 6px;
+      accent-color: var(--primary-color);
+      width: 16px;
+      height: 16px;
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236366f1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      cursor: pointer;
+      padding-right: 36px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shine 2s infinite;
+      transform: translateX(-100%);
+    }
+
+    @keyframes shine {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .input-container {
+      position: relative;
+    }
+
+    .floating-label {
+      position: absolute;
+      pointer-events: none;
+      left: 12px;
+      top: 10px;
+      transition: var(--transition);
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .input-container input:focus + .floating-label,
+    .input-container input:not(:placeholder-shown) + .floating-label,
+    .input-container textarea:focus + .floating-label,
+    .input-container textarea:not(:placeholder-shown) + .floating-label {
+      top: -8px;
+      left: 10px;
+      font-size: 12px;
+      background: var(--card-color);
+      padding: 0 4px;
+      color: var(--primary-color);
+    }
+
+    textarea.form-control {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    @media screen and (max-width: 500px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      
+      .radio-group {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-header">
+      <h1>Registration Form</h1>
+      <p>Please fill in your details</p>
+    </div>
+    <div class="form-body">
+      <form action="#" method="POST">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <div class="input-container">
+              <input type="text" id="fullName" name="fullName" class="form-control" placeholder=" " required>
+              <span class="floating-label">Enter your name</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contact">Contact Number</label>
+            <div class="input-container">
+              <input type="tel" id="contact" name="contact" class="form-control" placeholder=" " pattern="[0-9]{10}" required>
+              <span class="floating-label">Phone number</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-container">
+              <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+              <span class="floating-label">Email address</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company Name</label>
+            <div class="input-container">
+              <input type="text" id="company" name="company" class="form-control" placeholder=" " required>
+              <span class="floating-label">Company name</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department" name="department" class="form-control" required>
+              <option value="" disabled selected>Select department</option>
+              <option value="hr">HR</option>
+              <option value="sales">Sales</option>
+              <option value="development">Development</option>
+              <option value="marketing">Marketing</option>
+              <option value="others">Others</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Gender</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="gender" value="male" required> Male</label>
+              <label class="radio-option"><input type="radio" name="gender" value="female"> Female</label>
+              <label class="radio-option"><input type="radio" name="gender" value="prefer-not-to-say"> Prefer not to say</label>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="address">Address</label>
+            <div class="input-container">
+              <textarea id="address" name="address" class="form-control" placeholder=" " rows="2" required></textarea>
+              <span class="floating-label">Your address</span>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <button type="submit" class="submit-btn">Register Now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
